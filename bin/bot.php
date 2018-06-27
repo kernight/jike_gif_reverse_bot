@@ -3,7 +3,6 @@
 namespace bin;
 
 use GuzzleHttp\Client;
-use PHPQRCode\Constants;
 use PHPQRCode\QRcode;
 
 require_once "../vendor/autoload.php";
@@ -33,34 +32,38 @@ try {
 
     /* 第三步 等待登陆，获取token */
     $step = 60;
-    while ($step --){
-        try{
-            $response = parse_response($client->request('get', API_TOKEN."?uuid={$uuid}", COMMON_GUZZLE_OPTIONS));
+    while ($step--) {
+        try {
+            $response = parse_response($client->request('get', API_TOKEN . "?uuid={$uuid}", COMMON_GUZZLE_OPTIONS));
             $token = $response['token'];
             echo "login success!\n";
             break;
-        }catch (\GuzzleHttp\Exception\GuzzleException $e){
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
             echo "wait login……\n";
+        } finally {
+            sleep(1);
         }
-        sleep(1);
     }
-    if(!$step){
+    if (!$step) {
         echo "login fail.……\n";
     }
 
     /* 第四步 进入定时步骤，每5s刷新一次,执行逻辑 */
-    while(true){
+    while (true) {
         {
             $response = parse_response($client->request('post', API_TOPIC_MSG, array_merge([
-                'form_params'=>[
-                    'topic'=>'5a65faf09704e800116cab9c',
-                    'limit'=>'1',
-                    'loadMoreKey'=>'',
+                'form_params' => [
+                    'topic' => '5a65faf09704e800116cab9c',
+                    'limit' => '1',
+                    'loadMoreKey' => '',
                 ]
-            ],COMMON_GUZZLE_OPTIONS)));
+            ], COMMON_GUZZLE_OPTIONS)));
 
             $msgData = current($response['data']);
             echo "now id: {$msgData['id']} \n";
+            foreach ($msgData['pictureUrls'] as $picUrl) {
+                echo "now picUrl: {$picUrl['picUrl']} \n";
+            }
         }
         sleep(5);
     }
@@ -90,7 +93,8 @@ function parse_response(\GuzzleHttp\Psr7\Response $response)
     return $content;
 }
 
-function build_qr_code($text){
+function build_qr_code($text)
+{
     $code_arr = QRcode::text($text);
     $height = count($code_arr);
     $width = strlen(current($code_arr));
