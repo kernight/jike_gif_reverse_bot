@@ -1,0 +1,16 @@
+{
+    "name": "kernight/jike_gifbot_bot",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kernight",
+            "email": "m@kernight.com"
+        }
+    ],
+    "require": {
+        "aferrandini/phpqrcode": "^1.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "symfony/console": "^4.1"
+    }
+}
