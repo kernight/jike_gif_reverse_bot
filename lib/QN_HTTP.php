@@ -4,7 +4,7 @@ namespace lib;
 use GuzzleHttp\Client;
 use function GuzzleHttp\Psr7\parse_response;
 
-class QNUploader {
+class QN_HTTP {
     CONST API_QINIU_TOKEN = 'http://upload.jike.ruguoapp.com/token?bucket=jike';
     CONST API_QINIU_UPLOAD = 'http://up.qiniup.com';
     CONST COMMON_GUZZLE_OPTIONS = [

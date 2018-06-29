@@ -11,6 +11,8 @@
     "require": {
         "aferrandini/phpqrcode": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
-        "symfony/console": "^4.1"
+        "symfony/console": "^4.1",
+        "sybio/gif-frame-extractor": "^1.0",
+        "sybio/gif-creator": "^1.0"
     }
 }

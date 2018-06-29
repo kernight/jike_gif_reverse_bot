@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "df394f60333d103e8d1119d111c42359",
+    "content-hash": "cf7a5972e66b7d61e0ed7c4ba96da2d8",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -281,6 +281,98 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
+        },
+        {
+            "name": "sybio/gif-creator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sybio/GifCreator.git",
+                "reference": "250fc2f705181693c6c40b3d569d62353164bcbf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/Sybio/GifCreator/250fc2f705181693c6c40b3d569d62353164bcbf.zip",
+                "reference": "250fc2f705181693c6c40b3d569d62353164bcbf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "GifCreator": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Clément Guillemain",
+                    "homepage": "http://clementguillemain.fr",
+                    "role": "Developer / Freelancer"
+                }
+            ],
+            "description": "PHP class that creates animated GIF from multiple images",
+            "homepage": "https://github.com/Sybio/GifCreator",
+            "keywords": [
+                "animated",
+                "creation",
+                "encode",
+                "gif",
+                "php"
+            ],
+            "time": "2012-10-13T09:04:46+00:00"
+        },
+        {
+            "name": "sybio/gif-frame-extractor",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sybio/GifFrameExtractor.git",
+                "reference": "13e9880add3ae9cca10a48a0a3897fe3d0069f71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/Sybio/GifFrameExtractor/13e9880add3ae9cca10a48a0a3897fe3d0069f71.zip",
+                "reference": "13e9880add3ae9cca10a48a0a3897fe3d0069f71",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "GifFrameExtractor": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Clément Guillemain",
+                    "homepage": "http://clementguillemain.fr",
+                    "role": "Developer / Freelancer"
+                }
+            ],
+            "description": "PHP class that separates all the frames (and their duration) of an animated GIF",
+            "homepage": "https://github.com/Sybio/GifFrameExtractor",
+            "keywords": [
+                "animated",
+                "duration",
+                "frame",
+                "gif",
+                "php",
+                "separate",
+                "time"
+            ],
+            "time": "2012-10-13T09:06:51+00:00"
         },
         {
             "name": "symfony/console",
