@@ -60,12 +60,24 @@ class JK_HTTP
      * 发送评论
      * @param $token
      * @param $picKeys
-     * @param $msgId
+     * @param $msgData
      * @return bool
      * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
      */
-    public function sendComment($token, $msgId, $picKeys)
+    public function sendComment($token, $msgData, $picKeys)
     {
+        switch ($msgData['messageType']) {
+            case 'PERSONAL_UPDATE_ORIGINAL_POST':
+                $target_id = $msgData['personalUpdate']['id'];
+                $target_type = 'ORIGINAL_POST';
+                break;
+            case 'NORMAL':
+            default:
+                $target_id = $msgData['id'];
+                $target_type = 'OFFICIAL_MESSAGE';
+                break;
+        }
+
         $response = $this->parse_response($this->client->request('post', self::API_COMMENT, [
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
@@ -74,11 +86,11 @@ class JK_HTTP
                 'app-version' => "4.1.0"
             ],
             'json' => [
-                'targetId' => $msgId,
+                'targetId' => $target_id,
                 'content' => '我来反转',
                 'pictureKeys' => $picKeys,
                 'syncToPersonalUpdates' => true,
-                'targetType' => 'OFFICIAL_MESSAGE',
+                'targetType' => $target_type,
             ]
         ]));
 

@@ -73,29 +73,40 @@ try {
             $jk_client->checkToken($token);
             foreach ($config['topic'] as $topic) {
                 $msgData = $jk_client->getTopicMsg($topic['id']);
-                $topic_comment_switch = "runtime/comment/{$topic['id']}";
+                $topic_comment_switch = "runtime/comment/{$topic['id']}_{$msgData['id']}";
                 echo "now topic: {$topic['name']}  ";
                 if (is_file($topic_comment_switch)) {
                     echo "no new posts.\n";
                 } else {
                     $picKeys = [];
-                    foreach ($msgData['pictureUrls'] as $picUrl) {
+                    switch ($msgData['messageType']) {
+                        case 'PERSONAL_UPDATE_ORIGINAL_POST':
+                            $pictureUrls = $msgData['personalUpdate']['pictures'];
+                            break;
+                        case 'NORMAL':
+                        default:
+                            $pictureUrls = $msgData['pictureUrls'];
+                            break;
+                    }
+                    foreach ($pictureUrls as $picUrl) {
                         echo "\n now picUrl: {$picUrl['picUrl']} update_at:{$msgData['updatedAt']} \n";
                         $imgCacheFile = 'runtime/cache/' . md5($picUrl['picUrl']) . '.gif';
                         $imgCacheFileReverse = 'runtime/cache/' . md5($picUrl['picUrl']) . '_reverse.gif';
                         file_put_contents($imgCacheFile, file_get_contents($picUrl['picUrl']));
                         if (!is_file($imgCacheFile)) {
+                            echo "download file fail \n";
                             continue;
                         }
-                        if(!GIF::reserve($imgCacheFile,$imgCacheFileReverse)){
+                        if (!GIF::reserve($imgCacheFile, $imgCacheFileReverse)) {
+                            echo "reserve fail \n";
                             continue;
                         }
 
                         $picKeys[] = $qn_client->uploadImage($imgCacheFileReverse);
                     }
 
-                    if(count($picKeys)){
-                        $jk_client->sendComment($token,$msgData['id'],$picKeys);
+                    if (count($picKeys)) {
+                        $jk_client->sendComment($token, $msgData, $picKeys);
                     }
                     touch($topic_comment_switch);
                 }
