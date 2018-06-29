@@ -70,11 +70,12 @@ try {
     /*进入定时步骤，每5s刷新一次,执行逻辑 */
     while (true) {
         {
+            echo date("Y-m-d H:i:s")."\n";
             $jk_client->checkToken($token);
             foreach ($config['topic'] as $topic) {
                 $msgData = $jk_client->getTopicMsg($topic['id']);
                 $topic_comment_switch = "runtime/comment/{$topic['id']}_{$msgData['id']}";
-                echo "now topic: {$topic['name']}  ";
+                echo "now topic: {$topic['name']}\t";
                 if (is_file($topic_comment_switch)) {
                     echo "no new posts.\n";
                 } else {
@@ -89,7 +90,7 @@ try {
                             break;
                     }
                     foreach ($pictureUrls as $picUrl) {
-                        echo "\n now picUrl: {$picUrl['picUrl']} update_at:{$msgData['updatedAt']} \n";
+                        echo "\npicUrl: {$picUrl['picUrl']}\n";
                         $imgCacheFile = 'runtime/cache/' . md5($picUrl['picUrl']) . '.gif';
                         $imgCacheFileReverse = 'runtime/cache/' . md5($picUrl['picUrl']) . '_reverse.gif';
                         file_put_contents($imgCacheFile, file_get_contents($picUrl['picUrl']));
