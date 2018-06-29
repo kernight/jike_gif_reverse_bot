@@ -32,7 +32,7 @@ php bot.php
 nohup php bot.php &
 ```
 
-`nohup`和``&`参数能够让程序在后台执行。
+`nohup`和`&`参数能够让程序在后台执行。
 
 ## 协议
 本软件遵循MIT协议
