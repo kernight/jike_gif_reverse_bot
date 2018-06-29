@@ -87,7 +87,7 @@ class JK_HTTP
             ],
             'json' => [
                 'targetId' => $target_id,
-                'content' => '我来反转',
+                'content' => 'BOT自动反转了图片',
                 'pictureKeys' => $picKeys,
                 'syncToPersonalUpdates' => true,
                 'targetType' => $target_type,
