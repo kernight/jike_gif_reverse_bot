@@ -4,7 +4,7 @@ namespace lib;
 use GuzzleHttp\Client;
 use function GuzzleHttp\Psr7\parse_response;
 
-class HTTP {
+class JK_HTTP {
     CONST API_UUID = 'https://app.jike.ruguoapp.com/sessions.create';
     CONST API_TOKEN = 'https://app.jike.ruguoapp.com/sessions.wait_for_confirmation';
     CONST API_TOPIC_MSG = 'https://app.jike.ruguoapp.com/1.0/messages/history';
