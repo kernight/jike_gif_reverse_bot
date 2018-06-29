@@ -1,10 +1,11 @@
 <?php
+
 namespace lib;
 
 use GuzzleHttp\Client;
-use function GuzzleHttp\Psr7\parse_response;
 
-class QN_HTTP {
+class QN_HTTP
+{
     CONST API_QINIU_TOKEN = 'http://upload.jike.ruguoapp.com/token?bucket=jike';
     CONST API_QINIU_UPLOAD = 'http://up.qiniup.com';
     CONST COMMON_GUZZLE_OPTIONS = [
@@ -14,6 +15,7 @@ class QN_HTTP {
     ];
 
     protected $client;
+
     public function __construct()
     {
         $this->client = new Client();
@@ -31,15 +33,15 @@ class QN_HTTP {
         $response = $this->parse_response($this->client->request('post', self::API_QINIU_UPLOAD, array_merge([
             'multipart' => [
                 [
-                    'name'     => 'token',
+                    'name' => 'token',
                     'contents' => $token
                 ],
                 [
-                    'name'     => 'file',
+                    'name' => 'file',
                     'contents' => fopen($path, 'r')
                 ],
             ]
-        ],self::COMMON_GUZZLE_OPTIONS)));
+        ], self::COMMON_GUZZLE_OPTIONS)));
         return $response['key'];
     }
 

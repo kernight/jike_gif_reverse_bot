@@ -31,7 +31,6 @@ try {
             $jk_client->checkToken($token);
             echo "login success!\n";
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
-            var_dump($e->getMessage());
             $token = '';
         }
     }
@@ -120,7 +119,7 @@ try {
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     echo "guzzle error:\t" . $e->getMessage() . "\n";
 } catch (\Exception $e) {
-    echo "guzzle error:\t" . $e->getMessage() . "\n";
+    echo "system error:\t" . $e->getMessage() . "\n";
 }
 
 

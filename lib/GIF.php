@@ -1,12 +1,12 @@
 <?php
+
 namespace lib;
 
 use GifCreator\GifCreator;
 use GifFrameExtractor\GifFrameExtractor;
-use GuzzleHttp\Client;
-use function GuzzleHttp\Psr7\parse_response;
 
-class GIF {
+class GIF
+{
     /***
      * 反转GIF
      *
@@ -15,7 +15,7 @@ class GIF {
      * @return bool
      * @throws \Exception
      */
-    public static function reserve($path,$save_path)
+    public static function reserve($path, $save_path)
     {
         if (GifFrameExtractor::isAnimatedGif($path)) {
 
@@ -29,8 +29,8 @@ class GIF {
             }
             $gc = new GifCreator();
             $source = $gc->create(array_reverse($frameImages), array_reverse($durations), 0);
-            if($source){
-                return false !== file_put_contents($save_path,$source);
+            if ($source) {
+                return false !== file_put_contents($save_path, $source);
             }
             return false;
         }
